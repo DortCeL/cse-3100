@@ -9,6 +9,8 @@ const availableCats = [
   { name: 'Simba', age: '2' },
 ];
 
+const breeds = ['Sphynx', 'Peterbald', 'Birman', 'Abyssinian', 'Persian', 'Bengal', 'Siamese'];
+
 export default function AvailableCats() {
   const [cats, setCats] = useState([]);
 
@@ -20,6 +22,7 @@ export default function AvailableCats() {
         const catsWithImages = availableCats.map((cat, index) => ({
           ...cat,
           image: responses[index][0].url,
+          breed: breeds[Math.floor(Math.random() * breeds.length)],
         }));
 
         setCats(catsWithImages);
@@ -33,17 +36,38 @@ export default function AvailableCats() {
 
   return (
     <section className="text-center mt-4">
-      <h2>Available Cats</h2>
+      <div className="d-flex justify-content-between align-items-center">
+        <h2>Available Cats</h2>
+
+        <div className="d-flex gap-4">
+          {/* Breed selection part */}
+          <select name="" id="">
+            <option value="">select breed</option>
+            {breeds.map((breed, idx) => (
+              <option key={idx} value={breed}>
+                {breed}
+              </option>
+            ))}
+          </select>
+
+          {/* search by cat name part */}
+          <input type="text" placeholder="search by name" />
+          <button className="btn btn-primary">Search</button>
+        </div>
+      </div>
+
+      <hr />
       <p>Meet our adorable cats looking for their forever home!</p>
 
       <div className="mt-2 row g-4 cats-container" id="cats-container">
         {cats.map((cat, i) => (
-          <div key={i} className="col-md-4">
+          <div key={i} className="col-md-4 ">
             <div className="cat-card">
               <img src={cat.image} alt={cat.name} className="img-fluid mb-2" style={{ borderRadius: '8px', height: '200px', objectFit: 'cover' }} />
               <div className="cat-info">
                 <h3 className="h5 mb-1">{cat.name}</h3>
-                <p className="mb-0">Age: {cat.age}</p>
+                <p className="mb-1">Age: {cat.age}</p>
+                <p className="mb-1">Breed: {cat.breed}</p>
               </div>
             </div>
           </div>
