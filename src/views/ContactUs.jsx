@@ -7,6 +7,7 @@ const ContactUs = () => {
         fuga officiis consequatur pariatur aut deserunt quam culpa! Aut expedita enim doloribus sunt veniam magnam magni?
       </p>
 
+      {/* form with input fields */}
       <form action="#" className="d-flex flex-column gap-4 w-25 p-4">
         <label htmlFor="">Name</label>
         <input type="text" className="rounded" />

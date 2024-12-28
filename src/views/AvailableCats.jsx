@@ -9,6 +9,7 @@ const availableCats = [
   { name: 'Simba', age: '2' },
 ];
 
+// breeds array
 const breeds = ['Sphynx', 'Peterbald', 'Birman', 'Abyssinian', 'Persian', 'Bengal', 'Siamese'];
 
 export default function AvailableCats() {
@@ -27,10 +28,12 @@ export default function AvailableCats() {
         const catsWithImages = availableCats.map((cat, index) => ({
           ...cat,
           image: responses[index][0].url,
+          // including random breed name to each cat entry
           breed: breeds[Math.floor(Math.random() * breeds.length)],
         }));
 
         setCats(catsWithImages);
+        // setting all the cats for display
         setCatsToShow(catsWithImages);
         console.log(catsToShow);
       } catch (error) {
@@ -41,11 +44,13 @@ export default function AvailableCats() {
     fetchCatImages();
   }, []);
 
+  // search functionality : matches name and breed 
   function handleSearch() {
     const filteredCats = cats.filter((cat) => {
       return (!searchBreed || cat.breed.toLowerCase() === searchBreed.toLowerCase()) && (!searchName || cat.name.toLowerCase().includes(searchName.toLowerCase()));
     });
 
+    // sets filtered cats for display
     setCatsToShow(filteredCats);
   }
 
@@ -76,6 +81,7 @@ export default function AvailableCats() {
       <hr />
       <p>Meet our adorable cats looking for their forever home!</p>
 
+      {/* Filtering cats  */}
       <div className="mt-2 row g-4 cats-container" id="cats-container">
         {catsToShow.map((cat, i) => (
           <div key={i} className="col-md-4 ">
